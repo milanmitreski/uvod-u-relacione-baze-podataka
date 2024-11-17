@@ -14,10 +14,9 @@ Svakog ponedeljka, u periodu 15:00-16:00, u kabinetu 716. Obavezna je najava mej
 
 ## Obrađene teme na kursu
 
-1. Upitni jezik `SQL`
-    - Uvod u `SQL` (klauze `SELECT, FROM, WHERE`). Klauza `ORDER BY`.
-    - Spajanje tabela (naredba `JOIN`). Nedefinsane (`NULL`) vrednosti 
-    - Podupiti. Korelisan i nekorelisan podupit.
-    - Skupovni operatori `UNION (ALL), INTERSECT (ALL), EXCEPT (ALL)`. Skalarne funkcije.
-    - Funkcije za rad sa nedefinisanim vrednostima. `CASE` izraz.
-    - Agregatne funkcije (`COUNT, SUM, AVG, MIN, MAX`). Klauze `GROUP BY` i `HAVING`
+1. Uvod u upitni jezik `SQL` (klauze `SELECT, FROM, WHERE`). Klauza `ORDER BY`.
+2. Spajanje tabela (naredba `JOIN`). Nedefinsane (`NULL`) vrednosti 
+3. Podupiti. Korelisan i nekorelisan podupit.
+4. Skupovni operatori `UNION (ALL), INTERSECT (ALL), EXCEPT (ALL)`. Skalarne funkcije.
+5. Funkcije za rad sa nedefinisanim vrednostima. `CASE` izraz.
+6. Agregatne funkcije (`COUNT, SUM, AVG, MIN, MAX`). Klauze `GROUP BY` i `HAVING`
