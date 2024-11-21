@@ -6,7 +6,7 @@ Asistent: [Milan Mitreski](http://poincare.matf.bg.ac.rs/~milan.mitreski)
 
 ## Ispitne obaveze
 
-Biće uskoro objavljeno.
+Objavljeno kod profesora na sajtu ([link](https://poincare.matf.bg.ac.rs/~nenad/rbp/ispit/polaganje_ispita.pdf)).
 
 ## Konsultacije
 
