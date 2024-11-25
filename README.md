@@ -21,3 +21,4 @@ Svakog ponedeljka, u periodu 15:00-16:00, u kabinetu 716. Obavezna je najava mej
 5. Funkcije za rad sa nedefinisanim vrednostima. `CASE` izraz.
 6. Agregatne funkcije (`COUNT, SUM, AVG, MIN, MAX`). Klauze `GROUP BY` i `HAVING`
 7. Složeni `SQL` upit. Pomoćne tabele (`WITH` naredba).
+8. Jezik za definisanje podataka (DDL, naredbe `CREATE, ALTER, DROP`). Jezik za manipulaciju podataka (DML, naredbe `INSERT INTO, UPDATE, DELETE FROM`). 
