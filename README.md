@@ -10,8 +10,14 @@ Biće naknadno objavljeno.
 
 ## Konsultacije
 
-Biće naknadno objavljeno.
+Po dogovoru, putem mejla na [milan.mitreski@matf.bg.ac.rs](mailto:milan.mitreski@matf.bg.ac.rs).
 
 ## Obrađene teme na kursu
 
-Obrađene teme će biti ažurirane nakon svake nedelje.
+1. Uvod u upitni jezik `SQL` (klauze `SELECT, FROM, WHERE`). Klauza `ORDER BY`.
+
+## Instalacije
+
+Potrebno je instalirati **JetBrains DataGrip** integrisano razvojno okruženje (besplatna licenca uz studentski nalog sa Alasa) i **Docker** alat za kontejnerizaciju. Potom je potrebno povući sliku **ibmcom/db2** i preuzeti bazu **stud2020**. Baza se može preuzeti [ovde](https://poincare.matf.bg.ac.rs/~milan.mitreski/nastava/urbp/docker.pdf), a detaljno uputstvo za instalaciju i podešavanje može se naći [ovde](https://poincare.matf.bg.ac.rs/~milan.mitreski/nastava/urbp/docker.pdf).
+
+Uputstvo i baza preuzeti su sa sajta koleginice Milice Gnjatović.
