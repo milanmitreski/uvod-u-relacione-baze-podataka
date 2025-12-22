@@ -5,6 +5,13 @@
 -- Prebrojati koliko predmeta pripada kojoj kategoriji
 -- Izdvojiti kategoriju i broj predmeta iz te kategorije
 
+SELECT P.ID, CASE
+           WHEN P.ESPB < 6 THEN 'lak'
+           WHEN P.ESPB > 8 THEN 'tezak'
+           ELSE 'srednje tezak'
+       END AS KATEGORIJA
+FROM DA.PREDMET P;
+
 SELECT CASE
            WHEN P.ESPB < 6 THEN 'lak'
            WHEN P.ESPB > 8 THEN 'tezak'
@@ -86,7 +93,7 @@ WITH BROJ_PALIH AS (
 SELECT D.IME, D.PREZIME, COALESCE(BP.BROJ_PALIH, 0)
 FROM DA.DOSIJE D LEFT JOIN BROJ_PALIH BP ON (D.INDEKS = BP.INDEKS);
 
--- 6. Izdvojiti broj studenata koji su polozili neke predmete
+-- 5. Izdvojiti broj studenata koji su polozili neke predmete
 -- u bar 2 razlicita roka
 
 WITH STUDENTI_ISPITNIROK_POLOZENO AS (
@@ -102,7 +109,7 @@ WITH STUDENTI_ISPITNIROK_POLOZENO AS (
 SELECT COUNT(*)
 FROM STUDENTI_POLOZILI_U_BAR_DVA_ISPITNA_ROKA;
 
--- 7. Izdvojiti ime i prezime studenta i naziv ispitnog roka u kome
+-- 6. Izdvojiti ime i prezime studenta i naziv ispitnog roka u kome
 -- student ima svoj najmanji procenat uspešnosti na ispitima.
 -- Izdvojiti i procenat uspešnosti na ispitima u tom roku kao
 -- decimalan broj sa 2 cifre iza decimalne tačke. Procenat uspešnosti
@@ -118,7 +125,7 @@ WITH STUDENT_ISPITNIROK_PROCENAT AS (
                     WHEN I.STATUS = 'o' AND I.OCENA > 5 THEN 1
                     ELSE NULL
                 END
-            )*1.0/COUNT(*) AS PROCENAT
+            )*100.0/COUNT(*) AS PROCENAT
     FROM DA.ISPIT I
     GROUP BY I.INDEKS, I.SKGODINA, I.OZNAKAROKA
 ), STUDENT_ISPITNIROK_NAJMANJIPROCENAT AS (
