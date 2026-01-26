@@ -15,7 +15,11 @@ Uslov za uspešno polaganje predispitnih obaveza (tj. za izlazak na usmeni ispit
 
 ### Prvi kolokvijum
 
-Na prvom kolokvijumu moguće je ostvariti najviše 30 poena. Na prvom kolokvijumu radiće se 3 zadatka u SQL i obuhvataće prvih 6 časova vežbi. Datum održavanja prvog kolokvijuma biće objavljen blagovremeno. 
+Na prvom kolokvijumu moguće je ostvariti najviše 30 poena. Na prvom kolokvijumu radiće se 3 zadatka u SQL i obuhvataće prvih 6 časova vežbi.
+
+### Drugi kolokvijum
+
+Na drugom kolokvijumu moguće je ostvariti najviše 50 poena. Na drugom kolokvijumu izrađuju se zadaci iz teorije kao i zadaci sa vežbi od 7 nedelje pa do kraja kursa. Detaljna struktura drugog kolokvijuma biće naknadno saopštena.
 
 ## Konsultacije
 
@@ -26,6 +30,16 @@ Po dogovoru, putem mejla na [milan.mitreski@matf.bg.ac.rs](mailto:milan.mitreski
 1. Uvod u upitni jezik `SQL` (klauze `SELECT, FROM, WHERE`). Klauza `ORDER BY`.
 2. Spajanje tabela (naredba `JOIN`). Nedefinsane (`NULL`) vrednosti 
 3. Podupiti. Korelisan i nekorelisan podupit.
+4. Skupovni operatori `UNION (ALL), INTERSECT (ALL), EXCEPT (ALL)`. Skalarne funkcije.
+5. Funkcije za rad sa nedefinisanim vrednostima. `CASE` izraz.
+6. Agregatne funkcije (`COUNT, SUM, AVG, MIN, MAX`). Klauze `GROUP BY` i `HAVING`
+7. Složeni `SQL` upit. Pomoćne tabele (`WITH` naredba).
+8. Jezik za definisanje podataka (DDL, naredbe `CREATE, ALTER, DROP`). Jezik za manipulaciju podataka (DML, naredbe `INSERT INTO, UPDATE, DELETE FROM`). 
+9. Pogledi (`VIEW`). Indeksi (`INDEX`). Korisnički definisane funkcije (`FUNCTION`).
+10. `MERGE` naredba. Okidači (`TRIGGER`).
+11. Relaciona algebra. Relacioni račun.
+12. Vežbanje
+13. Vežbanje
 
 ## Instalacije
 
