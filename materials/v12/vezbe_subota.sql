@@ -1,0 +1,128 @@
+/** Resenja prvog kolokvijuma **/
+
+-- 1. zadatak
+
+-- I resenje
+
+SELECT D.IME, D.PREZIME, I.SKGODINA, I.POENI, I.OCENA, P.NAZIV, P.ESPB
+FROM DA.ISPIT I JOIN DA.PREDMET P ON (I.IDPREDMETA = P.ID)
+                JOIN DA.DOSIJE D ON (I.INDEKS = D.INDEKS)
+WHERE I.STATUS = 'o'
+  AND I.OCENA > 5
+  AND P.OZNAKA LIKE 'R%'
+  AND I.SKGODINA = (
+      SELECT MIN(SKGODINA)
+      FROM DA.UPISANKURS UK
+      WHERE UK.INDEKS = I.INDEKS
+        AND UK.IDPREDMETA = I.IDPREDMETA
+    );
+
+-- II resenje
+
+SELECT D.IME, D.PREZIME, D.INDEKS, I.SKGODINA, I.POENI, I.OCENA, P.NAZIV, P.ESPB
+FROM DA.PREDMET P JOIN DA.ISPIT I ON (P.ID = I.IDPREDMETA)
+                  JOIN DA.DOSIJE D ON (I.INDEKS = D.INDEKS)
+WHERE P.OZNAKA LIKE 'R%'
+    AND I.STATUS = 'o'
+    AND I.OCENA > 5
+    AND NOT EXISTS(
+        SELECT *
+        FROM DA.UPISANKURS UK
+        WHERE UK.INDEKS = I.INDEKS
+            AND UK.IDPREDMETA = I.IDPREDMETA
+            AND UK.SKGODINA < I.SKGODINA
+    );
+
+-- 2. zadatak
+
+-- I resenje
+
+SELECT D.INDEKS, D.DATUPISA, UK.IDPREDMETA, UK.SKGODINA,
+       CASE
+           WHEN EXISTS (
+               SELECT *
+               FROM DA.ISPIT I
+               WHERE I.STATUS = 'o'
+                 AND I.OCENA > 5
+                 AND I.INDEKS = UK.INDEKS
+                 AND I.IDPREDMETA = UK.IDPREDMETA
+                 AND I.SKGODINA = UK.SKGODINA
+           ) THEN 'P'
+           ELSE 'NP'
+       END AS "INDIKATOR"
+FROM DA.DOSIJE D JOIN DA.UPISANKURS UK ON (UK.INDEKS = D.INDEKS)
+WHERE MOD(D.INDEKS, 2) = 0
+    AND MONTH(D.DATUPISA) IN (6, 7)
+    AND D.MESTORODJENJA IN (
+        SELECT DISTINCT MESTORODJENJA
+        FROM DA.DOSIJE D1
+        WHERE D1.DATDIPLOMIRANJA IS NOT NULL
+    );
+
+-- II resenje
+
+SELECT D.INDEKS, D.DATUPISA, UK.IDPREDMETA, UK.SKGODINA,
+       CASE
+           WHEN I.INDEKS IS NOT NULL THEN 'P'
+           ELSE 'NP'
+       END AS "INDIKATOR"
+FROM DA.DOSIJE D JOIN DA.UPISANKURS UK ON (UK.INDEKS = D.INDEKS)
+                 LEFT JOIN DA.ISPIT I ON (
+                     UK.INDEKS = I.INDEKS
+                        AND UK.IDPREDMETA = I.IDPREDMETA
+                        AND UK.SKGODINA = I.SKGODINA
+                        AND I.STATUS = 'o'
+                        AND I.OCENA > 5
+                 )
+WHERE MOD(D.INDEKS, 2) = 0
+    AND MONTH(D.DATUPISA) IN (6, 7)
+    AND D.MESTORODJENJA IN (
+        SELECT DISTINCT MESTORODJENJA
+        FROM DA.DOSIJE D1
+        WHERE D1.DATDIPLOMIRANJA IS NOT NULL
+    );
+
+-- 3. zadatak
+
+SELECT UK.SKGODINA, P.NAZIV, COUNT(*) AS "BR. STUDENATA", 'Najvise studenata' AS "KOMENTAR"
+FROM DA.UPISANKURS UK JOIN DA.PREDMET P ON (UK.IDPREDMETA = P.ID)
+GROUP BY UK.IDPREDMETA, UK.SKGODINA, P.NAZIV
+HAVING COUNT(*) >= ALL(
+        SELECT COUNT(*)
+        FROM DA.UPISANKURS UK2
+        WHERE UK2.SKGODINA = UK.SKGODINA
+        GROUP BY UK2.IDPREDMETA, UK2.SKGODINA
+    )
+UNION ALL
+SELECT UK.SKGODINA, P.NAZIV, COUNT(*) AS "BR. STUDENATA", 'Najmanje studenata' AS "KOMENTAR"
+FROM DA.UPISANKURS UK JOIN DA.PREDMET P ON (UK.IDPREDMETA = P.ID)
+GROUP BY UK.IDPREDMETA, UK.SKGODINA, P.NAZIV
+HAVING COUNT(*) <= ALL(
+        SELECT COUNT(*)
+        FROM DA.UPISANKURS UK2
+        WHERE UK2.SKGODINA = UK.SKGODINA
+        GROUP BY UK2.IDPREDMETA, UK2.SKGODINA
+    );
+
+
+/** Zadaci sa sajta koleginice Milice Gnjatovic **/
+
+-- 1. zadatak
+-- Za svaki ispitni rok izdvojiti predmet koji su u tom ispitnom roku studenti položili sa najvećom
+-- prosečnom ocenom. Izdvojiti naziv ispitnog roka, naziv predmeta sa najvećom prosečnom ocenom i
+-- najveću prosečnu ocenu.
+
+SELECT IR.NAZIV, P.NAZIV, AVG(I.OCENA+0.0) "Prosecna ocena"
+FROM DA.ISPIT I JOIN DA.ISPITNIROK IR ON (I.SKGODINA = IR.SKGODINA AND I.OZNAKAROKA = IR.OZNAKAROKA)
+                JOIN DA.PREDMET P ON (I.IDPREDMETA = P.ID)
+WHERE I.STATUS = 'o' AND I.OCENA > 5
+GROUP BY I.SKGODINA, I.OZNAKAROKA, I.IDPREDMETA, IR.NAZIV, P.NAZIV
+HAVING AVG(I.OCENA+0.0) >= ALL(
+        SELECT AVG(I1.OCENA+0.0)
+        FROM DA.ISPIT I1
+        WHERE I1.STATUS = 'o'
+            AND I1.OCENA > 5
+            AND I1.SKGODINA = I.SKGODINA
+            AND I1.OZNAKAROKA = I.OZNAKAROKA
+        GROUP BY I1.SKGODINA, I1.OZNAKAROKA, I1.IDPREDMETA
+    );
