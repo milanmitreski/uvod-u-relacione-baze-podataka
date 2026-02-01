@@ -1,0 +1,1 @@
+Snimak prošlogodišnjih vežbi iz relacione algebre i relacionog računa može se pronaći [ovde](https://drive.google.com/file/d/1MbsgtShlFhlY98ZpAdzEB_qBpn-jRnrN/view).
